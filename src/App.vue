@@ -3,12 +3,12 @@
   <section class="bg-container">
     <div class="bg-form"></div>
       <div class="content-geral">
-      <img class="imagem-map" src="./assets/map.svg" alt="ilusreação de mapa"/>
+      <img class="imagem-map" src="./assets/svg/map.svg" alt="ilusreação de mapa"/>
       <div class="inputBox" v-show="input">
         <h2 class="title">Consulte o CEP</h2>
         <label>Digite um CEP: <span style="color:red;">*</span></label>
         <input type="text" v-model="recebeCep">
-        <small id="nomeErro" v-if="erroVazio">preencha o campo</small> 
+        <small id="nomeErro" v-if="erroVazio">Preencha o campo</small> 
         <small id="nomeErro" v-else-if="erroIncompleto">Digite o CEP completo</small>
         <small id="nomeErro" v-else-if="erroCepInvalido">CEP inexistente</small>
         <small id="exemplo"> Ex.: 60762080</small>
@@ -16,8 +16,9 @@
       </div>  
       <div class="tableBox" v-show="table">
         <Consulta :bairro="bairro" :rua="rua" :cidade="cidade" :estado="estado" :cep="cep" v-show="table"/>
-        <a class="btn-busca" @click="resetar">Nova busca</a>
+        <a class="btn-busca" @click="novaBusca">Nova busca</a>
       </div>
+      <img class="imagem-map-2" src="./assets/svg/map.svg" alt="ilusreação de mapa"/>
     </div>
   </section>
    </div> 
@@ -43,7 +44,7 @@ export default {
       table: false,
       input:true,
       erroCepInvalido: false,
-      validandoCep: "",
+      validandoCep: false,
       
     }
   },
@@ -53,53 +54,57 @@ export default {
   methods: {
     buscarCep: function(){
 
+      // Pegando os dados da API com Axios
+
       axios.get("https://api.postmon.com.br/v1/cep/" + this.recebeCep).then(res => {
           this.bairro = res.data.bairro;
           this.rua = res.data.logradouro;
           this.cidade = res.data.cidade;
           this.estado = res.data.estado;
           this.cep = res.data.cep;
+
         })
+        .catch(error => { 
+          console.log(error)
+          })
 
-      
-      if(this.recebeCep == '' || this.recebeCep == ' '){
+            // Verificação para saber se a input está vazia
 
-        this.erroVazio = true;
-        this.erroIncompleto = false;
+            if(this.recebeCep == '' || this.recebeCep == ' '){
+              this.erroVazio = true;
+              this.erroIncompleto = false;
+              this.erroCepInvalido = false;
 
-        this.recebeCep = "";
+              this.recebeCep = "";
+             
+            // Verificação para saber se o usuário digitou número de CEP completo
 
+            }else if(this.recebeCep.length < 8){
+              this.erroVazio = false;
+              this.erroIncompleto = true;
+              this.erroCepInvalido = false;
+              this.recebeCep = "";
+              
+            // Verificação para saber se o número de CEP existe
 
-      }else if(this.recebeCep.length < 8){
+            }else if(this.recebeCep !== this.cep){
+              this.erroVazio = false;
+              this.erroIncompleto = false;
+              this.erroCepInvalido = true;
 
-        this.erroVazio = false;
-        this.erroIncompleto = true;
+              this.recebeCep = "";
 
-        this.recebeCep = "";
-
-        
-      }else if(this.recebeCep != this.cep){
-        
-        this.erroCepInvalido = true;
-
-        this.recebeCep = "";
-
-
-      }else{
-        
-          this.erroVazio = false;
-          this.erroIncompleto = false;
-          this.erroCepInvalido = false;
-          this.input = false;
-          this.table = true;
-          
-          this.recebeCep = "";
-
-
-          console.log("deu bom");
-      }
+            }else{
+              this.erroVazio = false;
+              this.erroIncompleto = false;
+              this.erroCepInvalido = false;
+              this.input = false;
+              this.table = true;
+                
+              this.recebeCep = "";
+            }
     },
-    resetar: function(){
+    novaBusca: function(){
       this.table = false;
       this.input = true;
 
@@ -138,10 +143,15 @@ export default {
   min-width: 600px;
   background-color: #a004ac;
   clip-path: polygon(0 0, 0 100%, 36% 51%);
-  transition: 0.8s ease-in;
+  clip-path: polygon(67% 50%, 100% 100%, 100% 0);
 }
 
 .imagem-map{
+  max-width: 400px;
+  width: 50%;
+  display: none;
+}
+.imagem-map-2{
   max-width: 400px;
   width: 50%;
 }
@@ -158,6 +168,7 @@ export default {
 
 .title{
   color: #201f2d;
+  margin-bottom: 15px;
 }
 
 .inputBox{
@@ -179,7 +190,7 @@ export default {
   color: #000;
 }
 .inputBox input{
-  max-width: 400px;
+  max-width: 500px;
   height: 30px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   padding: 12px 10px;
@@ -202,7 +213,7 @@ export default {
 
 .btn-busca{
   max-width: 150px;
-  margin-top:2%;
+  margin-top:15px;
   padding: 8px 20px;
   background: #bd07ca;
   border-radius: 50px;
@@ -246,6 +257,12 @@ export default {
   .imagem-map{
     width: 100%;
     max-width: 250px;
+    display: inline;
+  }
+  .imagem-map-2{
+    width: 100%;
+    max-width: 250px;
+    display: none;
   }
 
   .inputBox{

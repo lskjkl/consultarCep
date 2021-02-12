@@ -25,19 +25,16 @@ export default {
         rua: String,
         cidade: String,
         estado: String,
-        cep: Number
+        cep: String
     }
 }
 </script>
 
 <style>
-table{
-    max-width: 100%;
-    background-color: #f2f4f5;
-}
-
-table-custom{
+.table-custom{
     width: 100%;
+    max-width: 500px;
+    background-color: #f2f4f5;
 }
 
 .table-custom .head{
@@ -49,11 +46,11 @@ table-custom{
 
 table td, table th {
     border-width: 0 0 1px;
-    padding: 0.5em 16px;
+    padding: 4px 5px;
 }
 
-@media (max-width: 991px) { 
-  .table-responsive {
+@media (max-width: 991px){ 
+  .table-responsive{
     display: block;
     position: relative;
     width: 100%;
@@ -65,15 +62,15 @@ table td, table th {
   .table-responsive tbody,
   .table-responsive th,
   .table-responsive td,
-  .table-responsive tr {
+  .table-responsive tr{
     display: block;
   }
 
-  .table-responsive thead {
+  .table-responsive thead{
     float: left;
   }
 
-  .table-responsive tbody {
+  .table-responsive tbody{
     width: auto;
     position: relative;
     overflow-x: auto;
@@ -81,15 +78,15 @@ table td, table th {
     white-space: nowrap;
   }
 
-  .table-responsive tbody tr {
+  .table-responsive tbody tr{
     display: inline-block;
   }
 
-  .table td:last-child {
+  .table td:last-child{
      border-right: #999999 solid 1px;
   }
 
-  .content table thead td, .content table thead th {
+  .content table thead td, .content table thead th{
     border-width: 0 0 1px;
   }
 }
