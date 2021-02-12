@@ -12,7 +12,7 @@
         <small id="nomeErro" v-else-if="erroIncompleto">Digite o CEP completo</small>
         <small id="nomeErro" v-else-if="erroCepInvalido">CEP inexistente</small>
         <small id="exemplo"> Ex.: 60762080</small>
-        <a class="btn-busca" @click="buscarCep">Buscar</a>
+        <a class="btn-busca" @click="buscarCep" :v-model="recebeCep">Buscar</a>
       </div>  
       <div class="tableBox" v-show="table">
         <Consulta :bairro="bairro" :rua="rua" :cidade="cidade" :estado="estado" :cep="cep" v-show="table"/>
@@ -44,7 +44,6 @@ export default {
       table: false,
       input:true,
       erroCepInvalido: false,
-      validandoCep: "",
       
     }
   },
@@ -62,7 +61,6 @@ export default {
           this.cep = res.data.cep;
 
           this.infosCep = res.data;
-          this.validandoCep = res.data.cep;
         })
 
 
@@ -72,7 +70,7 @@ export default {
         this.erroIncompleto = false;
 
         this.recebeCep = "";
-        this.validandoCep = "";
+
 
       }else if(this.recebeCep.length < 8){
 
@@ -80,14 +78,14 @@ export default {
         this.erroIncompleto = true;
 
         this.recebeCep = "";
-        this.validandoCep = "";
+
         
-      }else if(this.recebeCep != this.validandoCep){
+      }else if(this.recebeCep != this.cep){
         
         this.erroCepInvalido = true;
 
         this.recebeCep = "";
-        this.validandoCep = "";
+
 
       }else{
         
@@ -98,7 +96,7 @@ export default {
           this.table = true;
           
           this.recebeCep = "";
-          this.validandoCep = "";
+
 
           console.log("deu bom");
       }
@@ -108,7 +106,7 @@ export default {
       this.input = true;
 
       this.recebeCep = "";
-      this.validandoCep = "";
+
     }
   },  
 }
@@ -216,6 +214,7 @@ export default {
   display: flex;
   justify-content: center;
   text-decoration: none !important; 
+  cursor: pointer;
 }
 
 .btn-busca:hover{
@@ -224,7 +223,7 @@ export default {
 }
 
 #nomeErro{
-  color: #bd07ca;
+  color: red;
 }
 
 #exemplo{
