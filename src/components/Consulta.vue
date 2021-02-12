@@ -25,7 +25,7 @@ export default {
         rua: String,
         cidade: String,
         estado: String,
-        cep: String
+        cep: Number
     }
 }
 </script>
@@ -42,10 +42,6 @@ table-custom{
 
 .table-custom .head{
   background: #bd07ca;
-  -webkit-box-shadow: -1px 8px 16px -5px rgba(0,0,0,0.79);
-  -moz-box-shadow: -1px 8px 16px -5px rgba(0,0,0,0.79);
-  box-shadow: -1px 8px 16px -5px rgba(0,0,0,0.79);
-  
 }
 .table-custom .head .thead{
   color: #f2f4f5;

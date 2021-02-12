@@ -7,12 +7,12 @@
       <div class="inputBox" v-show="input">
         <h2 class="title">Consulte o CEP</h2>
         <label>Digite um CEP: <span style="color:red;">*</span></label>
-        <input type="text" value=cep v-model="recebeCep">
+        <input type="text" v-model="recebeCep">
         <small id="nomeErro" v-if="erroVazio">preencha o campo</small> 
         <small id="nomeErro" v-else-if="erroIncompleto">Digite o CEP completo</small>
         <small id="nomeErro" v-else-if="erroCepInvalido">CEP inexistente</small>
         <small id="exemplo"> Ex.: 60762080</small>
-        <a class="btn-busca" @click="buscarCep" :v-model="recebeCep">Buscar</a>
+        <a class="btn-busca" @click="buscarCep" >Buscar</a>
       </div>  
       <div class="tableBox" v-show="table">
         <Consulta :bairro="bairro" :rua="rua" :cidade="cidade" :estado="estado" :cep="cep" v-show="table"/>
@@ -32,7 +32,6 @@ export default {
 
   data(){
     return{
-      infosCep: [],
       bairro: "",
       rua: "",
       cidade: "",
@@ -44,6 +43,7 @@ export default {
       table: false,
       input:true,
       erroCepInvalido: false,
+      validandoCep: "",
       
     }
   },
@@ -59,11 +59,9 @@ export default {
           this.cidade = res.data.cidade;
           this.estado = res.data.estado;
           this.cep = res.data.cep;
-
-          this.infosCep = res.data;
         })
 
-
+      
       if(this.recebeCep == '' || this.recebeCep == ' '){
 
         this.erroVazio = true;
