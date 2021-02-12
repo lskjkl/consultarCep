@@ -1,15 +1,7 @@
 <template>
-  <div id="app">
-
-    <!-- V-FOR QUE NAO IMPRIMI O ARRAY NO HTML -->
-    
-    <!-- <div v-for="(informacao ,index) in infosCep" :key="index">
-      <Consulta :bairro="informacao.bairro" :rua="informacao.rua" :cidade="informacao.cidade" :estado="informacao.estado" :cep="informacao.cep"/>
-    </div> -->
-    
+<div class="app">
   <section class="bg-container">
     <div class="bg-form"></div>
-    
       <div class="content-geral">
       <img class="imagem-map" src="./assets/map.svg" alt="ilusreação de mapa"/>
       <div class="inputBox" v-show="input">
@@ -27,9 +19,8 @@
         <a class="btn-busca" @click="resetar">Nova busca</a>
       </div>
     </div>
-  </section>  
-
-  </div>
+  </section>
+   </div> 
 </template>
 
 <script>
@@ -149,7 +140,7 @@ export default {
   width: 100%;
   height: 100%;
   min-width: 600px;
-  background-color: #bd07ca;
+  background-color: #a004ac;
   clip-path: polygon(0 0, 0 100%, 36% 51%);
   transition: 0.8s ease-in;
 }
