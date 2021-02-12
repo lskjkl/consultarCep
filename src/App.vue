@@ -183,7 +183,7 @@ export default {
   justify-content: center;
   background: #f2f4f5;
   border-radius: 20px;
-  padding: 50px;
+  padding: 25px;
 }
 
 .inputBox label{
@@ -209,7 +209,7 @@ export default {
   justify-content: flex-start;
   background: #f2f4f5;
   border-radius: 20px;
-  padding: 15px;
+  padding: 25px;
 }
 
 .btn-busca{

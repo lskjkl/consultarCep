@@ -36,6 +36,13 @@ export default {
     max-width: 500px;
     background-color: #f2f4f5;
 }
+.table-responsive{
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin:15px 5px 20px;
+  }
 
 .table-custom .head{
   background: #bd07ca;
@@ -86,7 +93,7 @@ table td, table th {
      border-right: #999999 solid 1px;
   }
 
-  .content table thead td, .content table thead th{
+  .content-table table thead td, .content table thead th{
     border-width: 0 0 1px;
   }
 }
