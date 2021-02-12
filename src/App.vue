@@ -87,12 +87,12 @@ export default {
               
             // Verificação para saber se o número de CEP existe
 
-            }else if(this.recebeCep !== this.cep){
-              this.erroVazio = false;
-              this.erroIncompleto = false;
-              this.erroCepInvalido = true;
+            // }else if(this.recebeCep !== this.cep){
+            //   this.erroVazio = false;
+            //   this.erroIncompleto = false;
+            //   this.erroCepInvalido = true;
 
-              this.recebeCep = "";
+            //   this.recebeCep = "";
 
             }else{
               this.erroVazio = false;
