@@ -152,6 +152,7 @@ export default {
   display: none;
 }
 .imagem-map-2{
+  position: relative;
   max-width: 400px;
   width: 50%;
 }
@@ -205,7 +206,7 @@ export default {
   width:100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: #f2f4f5;
   border-radius: 20px;
   padding: 15px;
@@ -256,7 +257,7 @@ export default {
   }
   .imagem-map{
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
     display: inline;
   }
   .imagem-map-2{
