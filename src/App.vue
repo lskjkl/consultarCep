@@ -53,48 +53,32 @@ export default {
   },
   methods: {
     buscarCep: function(){
-
       // Pegando os dados da API com Axios
+      
+      if(this.recebeCep == '' || this.recebeCep == ' '){
+        this.erroVazio = true;
+        this.erroIncompleto = false;
+        this.erroCepInvalido = false;
 
-      axios.get("https://api.postmon.com.br/v1/cep/" + this.recebeCep).then(res => {
-          this.bairro = res.data.bairro;
-          this.rua = res.data.logradouro;
-          this.cidade = res.data.cidade;
-          this.estado = res.data.estado;
-          this.cep = res.data.cep;
+        this.recebeCep = "";
 
-        })
-        .catch(error => { 
-          console.log(error)
-          })
+      // Verificação para saber se o usuário digitou número de CEP completo    
 
-            // Verificação para saber se a input está vazia
+      }else if(this.recebeCep.length < 8){
+        this.erroVazio = false;
+        this.erroIncompleto = true;
+        this.erroCepInvalido = false;
+                  
+        this.recebeCep = "";
+      }else{
+        axios.get("https://api.postmon.com.br/v1/cep/" + this.recebeCep)
+          .then(res => {
+              this.bairro = res.data.bairro;
+              this.rua = res.data.logradouro;
+              this.cidade = res.data.cidade;
+              this.estado = res.data.estado;
+              this.cep = res.data.cep;
 
-            if(this.recebeCep == '' || this.recebeCep == ' '){
-              this.erroVazio = true;
-              this.erroIncompleto = false;
-              this.erroCepInvalido = false;
-
-              this.recebeCep = "";
-             
-            // Verificação para saber se o usuário digitou número de CEP completo
-
-            }else if(this.recebeCep.length < 8){
-              this.erroVazio = false;
-              this.erroIncompleto = true;
-              this.erroCepInvalido = false;
-              this.recebeCep = "";
-              
-            // Verificação para saber se o número de CEP existe
-
-            // }else if(this.recebeCep !== this.cep){
-            //   this.erroVazio = false;
-            //   this.erroIncompleto = false;
-            //   this.erroCepInvalido = true;
-
-            //   this.recebeCep = "";
-
-            }else{
               this.erroVazio = false;
               this.erroIncompleto = false;
               this.erroCepInvalido = false;
@@ -102,13 +86,29 @@ export default {
               this.table = true;
                 
               this.recebeCep = "";
-            }
-    },
+
+            })
+            .catch(error => { 
+              console.log(error)
+
+              this.erroVazio = false;
+              this.erroIncompleto = false;
+              this.erroCepInvalido = true;
+
+              this.recebeCep = "";
+            })
+  }
+},
     novaBusca: function(){
       this.table = false;
       this.input = true;
 
       this.recebeCep = "";
+      this.bairro = "";
+      this.rua = "";
+      this.cidade = "";
+      this.estado = "";
+      this.cep = "";
 
     }
   },  
